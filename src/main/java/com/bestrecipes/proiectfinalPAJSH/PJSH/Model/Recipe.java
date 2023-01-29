@@ -1,13 +1,15 @@
 package com.bestrecipes.proiectfinalPAJSH.PJSH.Model;
 
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Data
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Recipe {
 
     @Id

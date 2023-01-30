@@ -1,10 +1,7 @@
 package com.bestrecipes.proiectfinalPAJSH.PJSH.Controller;
 
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Model.*;
-import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.CocktailRepository;
-import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.CuisineRepository;
-import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.FoodRepository;
-import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.UserRepository;
+import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +21,12 @@ public class MainController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SuperUserRepository superUserRepository;
+
+    @Autowired
+    private SuperUser superUser;
 
     @PostMapping(path = "/addFood")
     public @ResponseBody String addNewFood(@RequestParam String name,
@@ -75,6 +78,11 @@ public class MainController {
     @GetMapping(path = "/allUser")
     public @ResponseBody Iterable<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    @GetMapping(path = "/superUser")
+    public @ResponseBody SuperUser getSuperUser() {
+        return superUserRepository.findById(1).get();
     }
 
     @GetMapping(path = "/getFood")
@@ -157,9 +165,9 @@ public class MainController {
         cuisine1.setFoodList(Arrays.asList(food1, food3));
         cuisine2.setFoodList(List.of(food2));
 
-        user1.setFoodList(Arrays.asList(food1, food3));
+        user1.setFoodList(Arrays.asList(food1));
         user2.setFoodList(List.of(food2));
-        user3.setFoodList(Arrays.asList(food1, food2, food3));
+        user3.setFoodList(Arrays.asList(food3));
 
         Cocktail cocktail1 = new Cocktail();
         cocktail1.setName("Negroni");
@@ -178,6 +186,8 @@ public class MainController {
         userRepository.save(user2);
         userRepository.save(user3);
 
+        System.out.println("This is the new super user: " + superUser.toString());
+        superUserRepository.save(superUser);
 
         Optional<Food> ret = foodRepository.findById(1L);
 

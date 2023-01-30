@@ -1,5 +1,6 @@
 package com.bestrecipes.proiectfinalPAJSH.PJSH.Controller;
 
+import com.bestrecipes.proiectfinalPAJSH.PJSH.Exceptions.NoRecipeFoundException;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Model.*;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +88,10 @@ public class MainController {
 
     @GetMapping(path = "/getFood")
     public @ResponseBody Food getFood(@RequestParam Long id) {
-
         if (foodRepository.findById(id).isPresent()) {
             return foodRepository.findById(id).get();
         } else {
-            throw new RuntimeException("No food found for id " + id);
+            throw new NoRecipeFoundException("No food found for id " + id);
         }
     }
 
@@ -100,7 +100,7 @@ public class MainController {
         if (cocktailRepository.findById(id).isPresent()) {
             return cocktailRepository.findById(id).get();
         } else {
-            throw new RuntimeException("No cocktail found for id " + id);
+            throw new NoRecipeFoundException("No cocktail found for id " + id);
         }
     }
 
@@ -114,15 +114,6 @@ public class MainController {
 
         Cuisine cuisine2 = new Cuisine();
         cuisine2.setType("French");
-
-        User user1 = new User();
-        user1.setName("Gordon Ramsey");     //No need to add email, is auto-generated from name
-
-        User user2 = new User();
-        user2.setName("Sorin");
-
-        User user3 = new User();
-        user3.setName("Scarlatescu");
 
         Food food1 = new Food();
         food1.setName("Pizza");
@@ -165,9 +156,18 @@ public class MainController {
         cuisine1.setFoodList(Arrays.asList(food1, food3));
         cuisine2.setFoodList(List.of(food2));
 
-        user1.setFoodList(Arrays.asList(food1));
+        User user1 = new User();
+        user1.setName("Gordon Ramsey");     //No need to add email, is auto-generated from name
+
+        User user2 = new User();
+        user2.setName("Sorin");
+
+        User user3 = new User();
+        user3.setName("Scarlatescu");
+
+        user1.setFoodList(List.of(food1));
         user2.setFoodList(List.of(food2));
-        user3.setFoodList(Arrays.asList(food3));
+        user3.setFoodList(List.of(food3));
 
         Cocktail cocktail1 = new Cocktail();
         cocktail1.setName("Negroni");

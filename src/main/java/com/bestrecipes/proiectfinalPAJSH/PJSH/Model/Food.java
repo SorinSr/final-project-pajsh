@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FOOD")
+@Table(name = "food_r")
 @Setter @Getter @NoArgsConstructor @ToString
 public class Food extends Recipe {
 

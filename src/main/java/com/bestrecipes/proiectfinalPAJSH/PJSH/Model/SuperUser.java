@@ -3,6 +3,7 @@ package com.bestrecipes.proiectfinalPAJSH.PJSH.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "super_user")
 @Data
+@PropertySource("classpath:superUSer.properties")
 @Component("superUser")
 public class SuperUser {
 
@@ -19,10 +21,10 @@ public class SuperUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Value("Uncle")
+    @Value( "${bestRecipes.superUser.firstName}" )
     private String firstName;
 
-    @Value("Roger")
+    @Value("${bestRecipes.superUser.lastName}")
     private String lastName;
 
     @Value("uncle_roger@gmail.com")
@@ -39,4 +41,5 @@ public class SuperUser {
 
     @Value("true")
     private Boolean isCurrentAdminUser;
+
 }

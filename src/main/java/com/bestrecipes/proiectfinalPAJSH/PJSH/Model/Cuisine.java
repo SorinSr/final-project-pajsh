@@ -11,6 +11,7 @@ import java.util.List;
 public class Cuisine {
 
     @Id
+    @Column(name = "id_cuisine", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 

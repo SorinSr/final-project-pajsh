@@ -13,6 +13,7 @@ import java.util.Set;
 public abstract class Recipe {
 
     @Id
+    @Column(name = "id_recipe", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 

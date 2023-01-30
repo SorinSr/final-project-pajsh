@@ -9,9 +9,11 @@ import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "regular_user")
 public class User {
 
     @Id
+    @Column(name = "id_user", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -24,15 +26,8 @@ public class User {
     }
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "food_id")
+    @JoinColumn(name = "food_id")
     @JsonIgnoreProperties("user")
     private List<Food> foodList;
 
-    public List<Food> getFoodList() {
-        return foodList;
-    }
-
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
-    }
 }

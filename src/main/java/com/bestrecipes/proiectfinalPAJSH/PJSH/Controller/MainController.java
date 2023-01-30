@@ -107,8 +107,6 @@ public class MainController {
     @GetMapping(path = "/testDB")
     public Food testDBConnection() {
 
-        System.out.println("Testing DB");
-
         Cuisine cuisine1 = new Cuisine();
         cuisine1.setType("Italian");
 
@@ -191,7 +189,7 @@ public class MainController {
 
         Optional<Food> ret = foodRepository.findById(1L);
 
-        System.out.println("Finish testing DB \nSuccess");
+        System.out.println("DB tests successfully done");
 
         return ret.get();
     }

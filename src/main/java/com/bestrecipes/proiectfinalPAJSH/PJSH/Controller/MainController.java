@@ -1,5 +1,6 @@
 package com.bestrecipes.proiectfinalPAJSH.PJSH.Controller;
 
+import com.bestrecipes.proiectfinalPAJSH.PJSH.Aspects.TestDBAspect;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Exceptions.NoRecipeFoundException;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Model.*;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
@@ -28,6 +29,9 @@ public class MainController {
 
     @Autowired
     private SuperUser superUser;
+
+    @Autowired
+    private TestDBAspect testDBAspect;
 
     @PostMapping(path = "/addFood")
     public @ResponseBody String addNewFood(@RequestParam String name,
@@ -82,7 +86,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/superUser")
-    public @ResponseBody SuperUser getSuperUser() {
+    public @ResponseBody SuperUser getAllSuperUser() {
         return superUserRepository.findById(1).get();
     }
 

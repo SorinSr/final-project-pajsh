@@ -29,6 +29,9 @@ public class InitDemo {
         Cuisine cuisine2 = new Cuisine();
         cuisine2.setType("French");
 
+        Cuisine cuisine3 = new Cuisine();
+        cuisine2.setType("German");
+
         Food food1 = new Food();
         food1.setName("Pizza");
         List<String> ingredientsList = new ArrayList<>();
@@ -67,8 +70,42 @@ public class InitDemo {
         food3.setDescription("Ideal for quick snack");
         food3.setCuisine(cuisine1);
 
-        cuisine1.setFoodList(Arrays.asList(food1, food3));
+        Food food4 = new Food();
+        food4.setName("Schnitzel");
+        food4.setIngredients(Arrays.asList("Bread crumbs", "veal", "eggs", "flour"));
+        food4.setInstructions(Arrays.asList("Put veal slices into flour", "Put it into eggs", "Put it into bread crumbs" ,"Fry into hot oil"));
+        food4.setDifficulty("medium");
+        food4.setPreparationTime(25);
+        food4.setCuisine(cuisine3);
+
+        Food food5 = new Food();
+        food5.setName("Quattro formaggi pasta");
+        food5.setIngredients(Arrays.asList("Multiple types of cheese", "pasta", "eggs", "sour cream"));
+        food5.setInstructions(Arrays.asList("Boil pasta", "Mix cheese with eggs and cream into a pan", "Put put pasta into the pan"));
+        food5.setDifficulty("medium");
+        food5.setPreparationTime(20);
+        food5.setCuisine(cuisine1);
+
+        Food food6 = new Food();
+        food6.setName("Carbonara pasta");
+        food6.setIngredients(Arrays.asList("Ham", "pasta", "eggs", "sour cream", "parmesan"));
+        food6.setInstructions(Arrays.asList("Boil pasta", "Mix cheese with eggs and ham into a pan", "Put put pasta into the pan"));
+        food6.setDifficulty("medium");
+        food6.setPreparationTime(20);
+        food6.setCuisine(cuisine1);
+
+        Food food7 = new Food();
+        food7.setName("Caprese salad");
+        food7.setIngredients(Arrays.asList("Mozzarella", "tomatoes", "olive oil"));
+        food7.setInstructions(Arrays.asList("Cut in slices tomatoes and mozzarella", "put on a plate with olive oil"));
+        food7.setDifficulty("easy");
+        food7.setPreparationTime(10);
+        food7.setCuisine(cuisine1);
+
+
+        cuisine1.setFoodList(Arrays.asList(food1, food3, food5, food6, food7));
         cuisine2.setFoodList(List.of(food2));
+        cuisine3.setFoodList(List.of(food4));
 
         User user1 = new User();
         user1.setName("Gordon Ramsey");     //No need to add email, is auto-generated from name
@@ -91,12 +128,26 @@ public class InitDemo {
         cocktail1.setAlcoholic(Boolean.TRUE);
         cocktail1.setDifficulty("Hard");
 
+        Cocktail cocktail2 = new Cocktail();
+        cocktail2.setName("Beer");
+        cocktail2.setIngredients(List.of("Beer"));
+        cocktail2.setInstructions(List.of("Pour into the glass"));
+        cocktail2.setTemperature(1);
+        cocktail2.setAlcoholic(Boolean.TRUE);
+        cocktail2.setDifficulty("Easy");
+
         cuisineRepository.save(cuisine1);
         cuisineRepository.save(cuisine2);
+        cuisineRepository.save(cuisine3);
         foodRepository.save(food1);
         foodRepository.save(food2);
         foodRepository.save(food3);
+        foodRepository.save(food4);
+        foodRepository.save(food5);
+        foodRepository.save(food6);
+        foodRepository.save(food7);
         cocktailRepository.save(cocktail1);
+        cocktailRepository.save(cocktail2);
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);

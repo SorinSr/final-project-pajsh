@@ -21,5 +21,6 @@ public abstract class Recipe {
     private List<String> ingredients;
     private List<String> instructions;
     private String other;
+    private String difficulty;
 
 }

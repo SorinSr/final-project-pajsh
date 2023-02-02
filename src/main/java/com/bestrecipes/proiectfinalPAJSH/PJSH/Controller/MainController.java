@@ -7,7 +7,9 @@ import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping(path = "demo")
@@ -82,8 +84,19 @@ public class MainController {
 
     @GetMapping(path = "/allUser")
     public @ResponseBody Iterable<User> getAllUser() {
-        return userRepository.findAll();
+        Iterable<User> iter = userRepository.findAll();
+//        reportHelper(iter);
+        return iter;
     }
+
+//    private List reportHelper(Iterable iterable){
+//
+//        List result = (List) StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
+//        System.out.println(result + " results +++++++++++++++++");
+//
+//        return result;
+//    }
+
 
     @GetMapping(path = "/superUser")
     public @ResponseBody SuperUser getAllSuperUser() {

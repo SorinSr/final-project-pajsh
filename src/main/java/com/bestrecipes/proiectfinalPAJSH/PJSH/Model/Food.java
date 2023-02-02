@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,7 +12,6 @@ import java.util.Objects;
 @Setter @Getter @NoArgsConstructor @ToString
 public class Food extends Recipe {
 
-    private String difficulty;
     private int preparationTime;
     private String description;
 
@@ -23,5 +23,7 @@ public class Food extends Recipe {
 //    @ManyToOne
 //    @JoinColumn(name = "user_id")
 //    private User user;
+
+
 
 }

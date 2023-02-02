@@ -1,14 +1,16 @@
 package com.bestrecipes.proiectfinalPAJSH.PJSH.Controller;
 
+import com.bestrecipes.proiectfinalPAJSH.PAJ.Demo.DemoThread;
+import com.bestrecipes.proiectfinalPAJSH.PAJ.Utils.ReportsMaker;
+import com.bestrecipes.proiectfinalPAJSH.PAJ.Utils.ShowSuperUser;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Model.*;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 public class InitDemo {
@@ -19,7 +21,6 @@ public class InitDemo {
     CocktailRepository cocktailRepository;
     SuperUserRepository superUserRepository;
     SuperUser superUser;
-
 
     public Food initializeDB() {
         Cuisine cuisine1 = new Cuisine();
@@ -61,7 +62,7 @@ public class InitDemo {
         food3.setName("Prosciutto sandwich");
         food3.setIngredients(Arrays.asList("Bread", "Olive oil", "Prosciutto"));
         food3.setInstructions(List.of("Put ingredients between bread slices"));
-        food3.setDifficulty("easy");
+        food3.setDifficulty("hard");
         food3.setPreparationTime(5);
         food3.setDescription("Ideal for quick snack");
         food3.setCuisine(cuisine1);
@@ -88,6 +89,7 @@ public class InitDemo {
         cocktail1.setInstructions(Arrays.asList("Mix all the ingredients", "Pour into the glass"));
         cocktail1.setTemperature(10);
         cocktail1.setAlcoholic(Boolean.TRUE);
+        cocktail1.setDifficulty("Hard");
 
         cuisineRepository.save(cuisine1);
         cuisineRepository.save(cuisine2);
@@ -99,12 +101,49 @@ public class InitDemo {
         userRepository.save(user2);
         userRepository.save(user3);
 
-        System.out.println("This is the new super user: " + superUser.toString());
+        ShowSuperUser showSuperUser = (superUser) -> ("This is the new super user: " + superUser.toString());
+        System.out.println(showSuperUser);
+
         superUserRepository.save(superUser);
 
         Optional<Food> ret = foodRepository.findById(1L);
 
         System.out.println("DB tests successfully done");
+
+        ReportsMaker reportsMaker = new ReportsMaker();
+        reportsMaker.addRecipesToGlossary(food1);
+        reportsMaker.addRecipesToGlossary(food2);
+        reportsMaker.addRecipesToGlossary(food3);
+        reportsMaker.addRecipesToGlossary(cocktail1);
+
+        reportsMaker.addUsersToList(user1);
+        reportsMaker.addUsersToList(user2);
+        reportsMaker.addUsersToList(user3);
+
+        reportsMaker.showGlossary();
+        reportsMaker.numberOfIngredients();
+        reportsMaker.numberOfRecipes();
+        reportsMaker.numberOfUsers();
+        reportsMaker.numberOfHardRecipes();
+
+         List <String> resultsList = new ArrayList<String>();
+
+        DemoThread demoThread = new DemoThread(reportsMaker.getSynchronizedRecipesMap(), Collections.synchronizedList(resultsList));
+
+        Thread thread1 = new Thread(demoThread, "Thread 1");
+        Thread thread2 = new Thread(demoThread, "Thread 2");
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Result after threads :\n"+ resultsList);
 
         return ret.get();
     }

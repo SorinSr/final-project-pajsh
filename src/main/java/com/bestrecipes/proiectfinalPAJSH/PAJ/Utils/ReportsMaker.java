@@ -41,25 +41,30 @@ public class ReportsMaker {
         }
     }
 
-    public void numberOfIngredients() {
+    public int numberOfIngredients() {
         System.out.println("*** STREAMS: Number of all ingredients : ");
-        System.out.println(allIngredientsGlossary.values().stream().mapToInt(strings -> strings.size()).sum());
+        int number = allIngredientsGlossary.values().stream().mapToInt(strings -> strings.size()).sum();
+        System.out.println(number);
+        return number;
     }
 
-    public void numberOfRecipes() {
+    public long numberOfRecipes() {
         System.out.println("*** STREAMS: List of recipes : ");
         Consumer<? super java.util.Set<java.lang.String>> c = System.out::println;
         Stream.of(allIngredientsGlossary.keySet()).forEach(c);
         System.out.println("*** STREAMS: Number of all recipes : ");
         System.out.println(allIngredientsGlossary.keySet().stream().count());
+        long number = allIngredientsGlossary.keySet().stream().count();
+        return number;
     }
 
-    public void numberOfUsers() {
+    public long numberOfUsers() {
         System.out.println("*** STREAMS: Number of all users : ");
         System.out.println((long) userList.size());
+        return (long) userList.size();
     }
 
-    public void numberOfHardRecipes() {
+    public long numberOfHardRecipes() {
         System.out.println("*** STREAMS: Number of hard recipes : " );
         Predicate<String> p = i -> i.equals("hard");
         long nr = 0;
@@ -67,6 +72,7 @@ public class ReportsMaker {
             nr = nr + Stream.of(allRecipesGlossary.get(x).getDifficulty().toLowerCase(Locale.ROOT)).filter(p).count();
         }
         System.out.println(nr);
+        return nr;
     }
 
 

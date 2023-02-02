@@ -33,8 +33,8 @@ public class DemoThread implements Runnable {
                     }
                     stringBuffer.append("\n");
                     modifiedRecipesList.add(stringBuffer.toString());
-//            getModifiedRecipesMap();
-                    recipesMap.remove(recipe.getName());
+//                  getModifiedRecipesMap();
+//                  recipesMap.remove(recipe.getName());
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

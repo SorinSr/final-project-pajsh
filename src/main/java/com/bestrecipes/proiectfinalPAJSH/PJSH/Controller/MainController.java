@@ -5,13 +5,12 @@ import com.bestrecipes.proiectfinalPAJSH.PJSH.Exceptions.NoRecipeFoundException;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Model.*;
 import com.bestrecipes.proiectfinalPAJSH.PJSH.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
+@Component
 @RequestMapping(path = "demo")
 public class MainController {
 

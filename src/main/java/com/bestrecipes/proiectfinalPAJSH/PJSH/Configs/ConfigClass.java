@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = "com.bestrecipes.proiectfinalPAJSH.PJSH")
+@ComponentScan(basePackages = "com.bestrecipes.proiectfinalPAJSH")
 @PropertySource({"classpath:application.properties","classpath:superUser.properties"})
 public class ConfigClass {
 }

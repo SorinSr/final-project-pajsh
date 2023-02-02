@@ -22,17 +22,31 @@ public class InitDemo {
     SuperUserRepository superUserRepository;
     SuperUser superUser;
 
+    Cuisine cuisine1 = new Cuisine();
+    Cuisine cuisine2 = new Cuisine();
+    Cuisine cuisine3 = new Cuisine();
+    Food food1 = new Food();
+    Food food2 = new Food();
+    Food food3 = new Food();
+    Food food4 = new Food();
+    Food food5 = new Food();
+    Food food6 = new Food();
+    Food food7 = new Food();
+    User user1 = new User();
+    User user2 = new User();
+    User user3 = new User();
+    Cocktail cocktail1 = new Cocktail();
+    Cocktail cocktail2 = new Cocktail();
+    ReportsMaker reportsMaker = new ReportsMaker();
+
+
     public Food initializeDB() {
-        Cuisine cuisine1 = new Cuisine();
         cuisine1.setType("Italian");
 
-        Cuisine cuisine2 = new Cuisine();
         cuisine2.setType("French");
 
-        Cuisine cuisine3 = new Cuisine();
         cuisine2.setType("German");
 
-        Food food1 = new Food();
         food1.setName("Pizza");
         List<String> ingredientsList = new ArrayList<>();
         ingredientsList.add("flour");
@@ -51,7 +65,6 @@ public class InitDemo {
         food1.setInstructions(Arrays.asList("Make dough", "Preheat oven at 220 degrees", "Put ingredients", "Cook 15 minutes"));
         food1.setCuisine(cuisine1);
 
-        Food food2 = new Food();
         food2.setName("Omlet");
         food2.setIngredients(Arrays.asList("Eggs", "Butter", "salt and pepper"));
         food2.setInstructions(Arrays.asList("Mix ingredients", "Cook the mix"));
@@ -61,7 +74,6 @@ public class InitDemo {
         food2.setOther("Can be eaten every day");
         food2.setCuisine(cuisine2);
 
-        Food food3 = new Food();
         food3.setName("Prosciutto sandwich");
         food3.setIngredients(Arrays.asList("Bread", "Olive oil", "Prosciutto"));
         food3.setInstructions(List.of("Put ingredients between bread slices"));
@@ -70,15 +82,13 @@ public class InitDemo {
         food3.setDescription("Ideal for quick snack");
         food3.setCuisine(cuisine1);
 
-        Food food4 = new Food();
         food4.setName("Schnitzel");
         food4.setIngredients(Arrays.asList("Bread crumbs", "veal", "eggs", "flour"));
-        food4.setInstructions(Arrays.asList("Put veal slices into flour", "Put it into eggs", "Put it into bread crumbs" ,"Fry into hot oil"));
+        food4.setInstructions(Arrays.asList("Put veal slices into flour", "Put it into eggs", "Put it into bread crumbs", "Fry into hot oil"));
         food4.setDifficulty("medium");
         food4.setPreparationTime(25);
         food4.setCuisine(cuisine3);
 
-        Food food5 = new Food();
         food5.setName("Quattro formaggi pasta");
         food5.setIngredients(Arrays.asList("Multiple types of cheese", "pasta", "eggs", "sour cream"));
         food5.setInstructions(Arrays.asList("Boil pasta", "Mix cheese with eggs and cream into a pan", "Put put pasta into the pan"));
@@ -86,7 +96,6 @@ public class InitDemo {
         food5.setPreparationTime(20);
         food5.setCuisine(cuisine1);
 
-        Food food6 = new Food();
         food6.setName("Carbonara pasta");
         food6.setIngredients(Arrays.asList("Ham", "pasta", "eggs", "sour cream", "parmesan"));
         food6.setInstructions(Arrays.asList("Boil pasta", "Mix cheese with eggs and ham into a pan", "Put put pasta into the pan"));
@@ -94,7 +103,6 @@ public class InitDemo {
         food6.setPreparationTime(20);
         food6.setCuisine(cuisine1);
 
-        Food food7 = new Food();
         food7.setName("Caprese salad");
         food7.setIngredients(Arrays.asList("Mozzarella", "tomatoes", "olive oil"));
         food7.setInstructions(Arrays.asList("Cut in slices tomatoes and mozzarella", "put on a plate with olive oil"));
@@ -107,20 +115,16 @@ public class InitDemo {
         cuisine2.setFoodList(List.of(food2));
         cuisine3.setFoodList(List.of(food4));
 
-        User user1 = new User();
         user1.setName("Gordon Ramsey");     //No need to add email, is auto-generated from name
 
-        User user2 = new User();
         user2.setName("Sorin");
 
-        User user3 = new User();
         user3.setName("Scarlatescu");
 
         user1.setFoodList(List.of(food1));
         user2.setFoodList(List.of(food2));
         user3.setFoodList(List.of(food3));
 
-        Cocktail cocktail1 = new Cocktail();
         cocktail1.setName("Negroni");
         cocktail1.setIngredients(Arrays.asList("Campari", "Gin", "Vermouth", "Ice"));
         cocktail1.setInstructions(Arrays.asList("Mix all the ingredients", "Pour into the glass"));
@@ -128,7 +132,6 @@ public class InitDemo {
         cocktail1.setAlcoholic(Boolean.TRUE);
         cocktail1.setDifficulty("Hard");
 
-        Cocktail cocktail2 = new Cocktail();
         cocktail2.setName("Beer");
         cocktail2.setIngredients(List.of("Beer"));
         cocktail2.setInstructions(List.of("Pour into the glass"));
@@ -161,23 +164,7 @@ public class InitDemo {
 
         System.out.println("DB tests successfully done");
 
-        ReportsMaker reportsMaker = new ReportsMaker();
-        reportsMaker.addRecipesToGlossary(food1);
-        reportsMaker.addRecipesToGlossary(food2);
-        reportsMaker.addRecipesToGlossary(food3);
-        reportsMaker.addRecipesToGlossary(cocktail1);
-
-        reportsMaker.addUsersToList(user1);
-        reportsMaker.addUsersToList(user2);
-        reportsMaker.addUsersToList(user3);
-
-        reportsMaker.showGlossary();
-        reportsMaker.numberOfIngredients();
-        reportsMaker.numberOfRecipes();
-        reportsMaker.numberOfUsers();
-        reportsMaker.numberOfHardRecipes();
-
-         List <String> resultsList = new ArrayList<String>();
+        List<String> resultsList = new ArrayList<String>();
 
         DemoThread demoThread = new DemoThread(reportsMaker.getSynchronizedRecipesMap(), Collections.synchronizedList(resultsList));
 
@@ -194,8 +181,33 @@ public class InitDemo {
             throw new RuntimeException(e);
         }
 
-        System.out.println("Result after threads :\n"+ resultsList);
+        System.out.println("Result after threads :\n" + resultsList);
+
+        generateReport();
 
         return ret.get();
+    }
+
+    public void generateReport() {
+
+        reportsMaker.addRecipesToGlossary(food1);
+        reportsMaker.addRecipesToGlossary(food2);
+        reportsMaker.addRecipesToGlossary(food3);
+        reportsMaker.addRecipesToGlossary(food4);
+        reportsMaker.addRecipesToGlossary(food5);
+        reportsMaker.addRecipesToGlossary(food6);
+        reportsMaker.addRecipesToGlossary(food7);
+        reportsMaker.addRecipesToGlossary(cocktail1);
+        reportsMaker.addRecipesToGlossary(cocktail2);
+
+        reportsMaker.addUsersToList(user1);
+        reportsMaker.addUsersToList(user2);
+        reportsMaker.addUsersToList(user3);
+
+        reportsMaker.showGlossary();
+        reportsMaker.numberOfIngredients();
+        reportsMaker.numberOfRecipes();
+        reportsMaker.numberOfUsers();
+        reportsMaker.numberOfHardRecipes();
     }
 }
